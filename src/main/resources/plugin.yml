@@ -1,0 +1,8 @@
+name: ChestManagement
+version: '${project.version}'
+main: ch.ydavid.chestmanagement.ChestManagement
+api-version: '1.19'
+commands:
+  search:
+    description: Searches in Chest
+    usage: /search

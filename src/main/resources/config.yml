@@ -1,0 +1,6 @@
+search-message: "&aSearching for &6%item%&a..."
+found-message: "&aFound &c%count% &6%item%&a in your Area!&r"
+emptyhand-message: "&cPlease hold a &6Item &cor provide a item as &bArgument."
+usage-message: "&cUsage: &f/search &6[item] &b[radius]"
+parse-error: "&c Could not parse &6%text%&c to an Integer!"
+default-radius: 10

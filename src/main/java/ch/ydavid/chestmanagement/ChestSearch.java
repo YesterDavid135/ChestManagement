@@ -53,14 +53,18 @@ public class ChestSearch implements CommandExecutor, TabCompleter {
     private List<String> getItemList(String search) {
         search = search.toLowerCase();
         List<String> items = new ArrayList<>();
-        if (Material.matchMaterial(search) != null){
-            items.add(Material.matchMaterial(search).toString());
+        if (Material.matchMaterial(search) != null) {
+            NamespacedKey key = Material.matchMaterial(search).getKey();
+            String fullItemName = key.getNamespace() + ":" + key.getKey();
+
+            items.add(fullItemName);
             return items;
         }
-        
+
         for (Material material : Material.values()) {
-            if (material.name().toLowerCase().contains(search)) {
-                items.add(material.name().toLowerCase());
+            String fullItemName = material.getKey().getNamespace() + ":" + material.getKey().getKey();
+            if (fullItemName.contains(search)) {
+                items.add(fullItemName);
             }
         }
         return items;
@@ -91,14 +95,14 @@ public class ChestSearch implements CommandExecutor, TabCompleter {
         }
 
         // Search for the Item given as Parameter
-            List<String> itemList = getItemList(args[0]);
-            if (itemList.size() == 0) {
-                String message = plugin.getMessageByKey("usage-message");
-                plugin.sendMessage(player, message);
-                return;
-            }
-            Material item = Material.matchMaterial(itemList.get(0));
-            scanArea(player, item, radius);
+        List<String> itemList = getItemList(args[0]);
+        if (itemList.size() == 0) {
+            String message = plugin.getMessageByKey("usage-message");
+            plugin.sendMessage(player, message);
+            return;
+        }
+        Material item = Material.matchMaterial(itemList.get(0));
+        scanArea(player, item, radius);
 
 
     }

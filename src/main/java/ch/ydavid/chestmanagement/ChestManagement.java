@@ -21,26 +21,29 @@ public final class ChestManagement extends JavaPlugin {
         this.getCommand("search").setExecutor(new ChestSearch());
         this.getCommand("search").setTabCompleter(new ChestSearch());
 
+        this.getCommand("sort").setExecutor(new ChestSort());
+        this.getCommand("sort").setTabCompleter(new ChestSort());
+
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
 
-        for (World w : Bukkit.getServer().getWorlds()){ //Deletes all leftover ChestMarkers
-            for (Entity e : w.getEntities()){
-                if (e.getName().equalsIgnoreCase("ChestMarker")){
+        for (World w : Bukkit.getServer().getWorlds()) { //Deletes all leftover ChestMarkers
+            for (Entity e : w.getEntities()) {
+                if (e.getName().equalsIgnoreCase("ChestMarker")) {
                     e.remove();
                 }
             }
         }
     }
 
-    public String getMessageByKey(String key){
+    public String getMessageByKey(String key) {
         return messagesConfig.getString(key);
     }
 
-    public void sendMessage(Player target, String message){
+    public void sendMessage(Player target, String message) {
         message = ChatColor.translateAlternateColorCodes('&', message);
         target.sendMessage(message);
     }

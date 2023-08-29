@@ -6,3 +6,6 @@ commands:
   search:
     description: Searches in Chest
     usage: /search
+  sort:
+    description: Sorts a Chest or your Inventory
+    usage: /sort

@@ -75,8 +75,7 @@ public class ChestSearch implements CommandExecutor, TabCompleter {
 
         if (args.length == 0) { // Search for Item in Players Hand
             ItemStack item = player.getInventory().getItemInMainHand();
-
-            if (item.getData().getItemType().isAir()) {
+            if (item.getType().isAir()) {
                 String message = plugin.getMessageByKey("emptyhand-message");
                 plugin.sendMessage(player, message);
                 return;

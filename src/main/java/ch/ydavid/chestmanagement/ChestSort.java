@@ -53,21 +53,52 @@ public class ChestSort implements CommandExecutor, TabCompleter {
 
     private ItemStack[] sort(Inventory inv) {
         ItemStack[] content = inv.getContents();
-        Arrays.sort(content, (item1, item2) -> {
+        Arrays.sort(content, (item1, item2) -> { // Sort by Item Name
             if (item1 == null && item2 == null) {
                 return 0;
             }
             if (item1 == null) {
-                return -1;
-            }
-            if (item2 == null) {
                 return 1;
             }
-
+            if (item2 == null) {
+                return -1;
+            }
             String item1Name = item1.getType().getKey().getKey();
             String item2Name = item2.getType().getKey().getKey();
-            return item1Name.compareToIgnoreCase(item2Name);
+            return item2Name.compareToIgnoreCase(item1Name);
         });
+
+        for (int i = 0; i < content.length - 1; i++) { //Stack items together
+            ItemStack currentItem = content[i];
+            if (currentItem == null) {
+                continue;
+            }
+
+            for (int j = i + 1; j < content.length; j++) {
+                ItemStack nextItem = content[j];
+                if (nextItem == null) {
+                    continue;
+                }
+
+                if (currentItem.isSimilar(nextItem) && currentItem.getAmount() + nextItem.getAmount() <= currentItem.getMaxStackSize()) {
+                    currentItem.setAmount(currentItem.getAmount() + nextItem.getAmount());
+                    content[j] = null;
+                }
+            }
+        }
+        // Remove Empty Slots between the items
+        for (int i = 0; i < content.length; i++) {
+            if (content[i] == null) {
+                for (int j = i + 1; j < content.length; j++) {
+                    if (content[j] != null) {
+                        content[i] = content[j];
+                        content[j] = null;
+                    }
+                }
+                break;
+            }
+        }
+
         return content;
     }
 

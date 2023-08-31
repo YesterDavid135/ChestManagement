@@ -166,7 +166,7 @@ public class ChestSearch implements CommandExecutor, TabCompleter {
         stand.setHelmet(stack);
 
         Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
-        Team team = board.getTeam("blueTeam");
+        Team team = board.getTeam("chestSortMarker");
 
         team.addEntry(stand.getUniqueId().toString());
 

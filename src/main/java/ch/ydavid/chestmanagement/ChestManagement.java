@@ -24,6 +24,10 @@ public final class ChestManagement extends JavaPlugin {
         this.getCommand("sort").setExecutor(new ChestSort());
         this.getCommand("sort").setTabCompleter(new ChestSort());
 
+        if (Bukkit.getScoreboardManager().getMainScoreboard().getTeam("chestSortMarker") == null){
+            Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam("chestSortMarker").setColor(ChatColor.GOLD);
+        }
+
     }
 
     @Override
